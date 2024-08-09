@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Products and Cart{% endblock %}
+
+{% block content %}
+<h1>Products</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product, category in products_with_categories %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>${{ product.price }}</td>
+            <td>{{ category.name }}</td>
+            <td>
+                <a href="{{ url_for('add_product_to_cart', product_id=product.id) }}" class="btn btn-success">Add to Cart</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('view_cart') }}" class="btn btn-primary">View Cart</a>
+{% endblock %}
