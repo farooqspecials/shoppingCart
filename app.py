@@ -31,6 +31,11 @@ class Product(db.Model):
 with app.app_context():
     db.create_all()
 
+#home page 
+@app.route('/')
+def home():
+    return render_template('home.html')
+
 # Route for adding categories
 @app.route('/add_category', methods=['GET', 'POST'])
 def add_category():

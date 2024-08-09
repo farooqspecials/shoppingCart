@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Category</title>
-</head>
-<body>
-    <h1>Add Category</h1>
-    <form action="{{ url_for('add_category') }}" method="POST">
+{% extends "base.html" %}
+
+{% block title %}Add Category{% endblock %}
+
+{% block content %}
+<h1>Add Category</h1>
+<form action="{{ url_for('add_category') }}" method="POST">
+    <div class="form-group">
         <label for="name">Category Name:</label>
-        <input type="text" name="name" required>
-        <button type="submit">Add Category</button>
-    </form>
-    <a href="{{ url_for('add_product') }}">Add Product</a>
-</body>
-</html>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Category</button>
+</form>
+{% endblock %}

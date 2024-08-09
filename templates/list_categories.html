@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Categories</title>
-</head>
-<body>
-    <h1>Categories</h1>
-    <ul>
-        {% for category in categories %}
-        <li>{{ category.name }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{{ url_for('add_category') }}">Add Category</a>
-    <a href="{{ url_for('add_product') }}">Add Product</a>
-    <a href="{{ url_for('list_products_and_categories') }}">View Products</a>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<h1>Categories</h1>
+<ul class="list-group">
+    {% for category in categories %}
+    <li class="list-group-item">{{ category.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
