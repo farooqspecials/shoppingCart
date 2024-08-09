@@ -73,6 +73,23 @@ def add_product():
 
     return render_template('add_product.html', categories=categories)
 
+
+# Route to list all categories
+@app.route('/categories')
+def list_categories():
+    # Query all categories
+    categories = Category.query.all()
+    return render_template('list_categories.html', categories=categories)
+
+# Route to list all products with their categories using an explicit join
+@app.route('/products_and_categories')
+def list_products_and_categories():
+    # Perform a join between Product and Category
+    products_with_categories = db.session.query(Product, Category).join(Category).all()
+
+    return render_template('list_products_and_categories.html', products_with_categories=products_with_categories)
+
+
 # Run the application
 if __name__ == '__main__':
     app.run(debug=True)
