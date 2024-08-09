@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for,session
+from flask import Flask, render_template, request, redirect, url_for,session, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -151,7 +151,25 @@ def list_products_and_cart():
     products_with_categories = db.session.query(Product, Category).join(Category).all()
     return render_template('list_products_and_cart.html', products_with_categories=products_with_categories)
 
-
+# Route for checkout
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if request.method == 'POST':
+        # Get customer details from the form
+        customer_name = request.form.get('customer_name')
+        customer_address = request.form.get('customer_address')
+        
+        # Process checkout (e.g., save details, clear cart)
+        # In a real application, save to a database, send emails, etc.
+        
+        # Clear the cart
+        session.pop('cart', None)
+        
+        # Show a thank you message
+        flash(f"Thank you, {customer_name}, for your purchase! Your order will be delivered to {customer_address}.")
+        return redirect(url_for('home'))
+    
+    return render_template('checkout.html')
 
 # Run the application
 if __name__ == '__main__':
